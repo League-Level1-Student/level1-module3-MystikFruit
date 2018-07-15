@@ -3,7 +3,6 @@
  *    Copyright (c) The League of Amazing Programmers 2013-2018
  *    Level 1
  */
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
@@ -11,7 +10,7 @@ import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
- 
+
 /** We’re going to make a slideshow of cool optical illusions. When the user clicks on an illusion, a new one will be loaded. **/
 
 public class BookOfIllusions extends MouseAdapter {
@@ -27,7 +26,7 @@ public class BookOfIllusions extends MouseAdapter {
 	}
 
 	// 1. Make a JFrame variable and initialize it using "new JFrame()"
-
+	
 	private void createBook() {
 		// 2. make the frame visible
 		// 3. set the size of the frame
