@@ -41,118 +41,86 @@ public class Jeopardy implements ActionListener {
 
 	private void start() {
 		JFrame frame = new JFrame();
+
 		quizPanel = new JPanel();
+
 		frame.setLayout(new BorderLayout());
 
-		// 1. Make the frame show up
 		frame.setVisible(true);
-		// 2. Give your frame a title
+
 		frame.setTitle("Howard");
-		// 3. Create a JPanel variable to hold the header using the createHeader method
+
 		header = createHeader("Animals");
-		// 4. Add the header component to the quizPanel
+
 		quizPanel.add(header);
-		// 5. Add the quizPanel to the frame
+
 		frame.add(quizPanel);
-		// 6. Use the createButton method to set the value of firstButton
+
 		firstButton = createButton("$100");
-		// 7. Add the firstButton to the quizPanel
+
 		quizPanel.add(firstButton);
-		// 8. Write the code inside the createButton() method below. Check that your
-		// game looks like Figure 1 in the Jeopardy Handout - http://bit.ly/1bvnvd4.
 
-		// 9. Use the secondButton variable to hold a button using the createButton
-		// method
-		secondButton = createButton("$200");
+		secondButton = createButton("$1,000,000");
 
-		// 10. Add the secondButton to the quizPanel
 		quizPanel.add(secondButton);
-		// 11. Add action listeners to the buttons (2 lines of code)
+
 		firstButton.addActionListener(this);
+
 		secondButton.addActionListener(this);
-		// 12. Fill in the actionPerformed() method below
 
 		frame.pack();
+
 		quizPanel.setLayout(new GridLayout(buttonCount + 1, 3));
+
 		frame.add(makeScorePanel(), BorderLayout.NORTH);
 		frame.setSize(Toolkit.getDefaultToolkit().getScreenSize().height,
 				Toolkit.getDefaultToolkit().getScreenSize().width);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	/*
-	 * 13. Use the method provided to play the Jeopardy theme music
-	 * 
-	 * 14. Add buttons so that you have $200, $400, $600, $800 and $1000 questions
-	 *
-	 * [optional] Use the showImage or playSound methods when the user answers a
-	 * question
-	 */
-
 	private JButton createButton(String dollarAmount) {
-		// Create a new JButton
 		JButton button = new JButton();
-		// Set the text of the button to the dollarAmount
 		button.setText(dollarAmount);
-		// Increment the buttonCount (this should make the layout vertical)
-		buttonCount +=1;
-		// Return your new button instead of the temporary button
+		buttonCount += 1;
 		return button;
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		// Remove this temporary message:
-		// Use the method that plays the jeopardy theme music.
 		playJeopardyTheme();
 		JButton buttonPressed = (JButton) arg0.getSource();
-		// If the buttonPressed was the firstButton
-		if(buttonPressed.equals(firstButton)) {
-		askQuestion("What is the fastest sea creature, in the world?", "sailfish", 100);
+		if (buttonPressed.equals(firstButton)) {
+			askQuestion("What is the fastest sea creature, in the world?", "sailfish", 100);
 		}
-		// Call the askQuestion() method
-
-		// Fill in the askQuestion() method. When you play the game, the score should
-		// change.
-
-		// Or if the buttonPressed was the secondButton
-		if(buttonPressed.equals(secondButton)) {
-		askQuestion("", "", 200);
+		if (buttonPressed.equals(secondButton)) {
+			askQuestion1("What is the fastest land animal, for it's size?", "paratarsotomus macropalpis", 1000000);
 		}
-		// Call the askQuestion() method with a harder question
-
-		// Clear the button text (set the button text to nothing)
-
 	}
 
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
-		// Remove this temporary message
 		String sea = JOptionPane.showInputDialog("What is the fastest sea species, in the world?");
-		// Use a pop up to ask the user the question
-
-		// If the answer is correct
-		if (sea.equalsIgnoreCase("sailfish")){
-		score = +prizeMoney;
-		updateScore();
-		JOptionPane.showMessageDialog(null, "You are correct!");
+		if (sea.equalsIgnoreCase("sailfish")) {
+			score = +prizeMoney;
+			updateScore();
+			JOptionPane.showMessageDialog(null, "You are correct!");
 		} else {
-		score = -prizeMoney;
-		JOptionPane.showMessageDialog(null, "You are wrong! The correct answer was sailfish." );
-		updateScore();
+			JOptionPane.showMessageDialog(null, "You are wrong! The correct answer was sailfish.");
+			score = -prizeMoney;
+			updateScore();
 		}
-		// Increase the score by the prizeMoney
+	}
 
-		// Call the updateScore() method
-		
-		// Pop up a message to tell the user they were correctAnswer
-		
-		// Otherwise
-
-		// Decrement the score by the prizeMoney
-
-		// Pop up a message to tell the user the correct answer
-
-		// Call the updateScore() method
-
+	private void askQuestion1(String question1, String correctAnswer1, int prizeMoney1) {
+		String land = JOptionPane.showInputDialog("What is the fastest land animal, for it's size?");
+		if (land.equalsIgnoreCase("paratarsotomus macropalpis")) {
+			score = +prizeMoney1;
+			updateScore();
+			JOptionPane.showMessageDialog(null, "You are correct!");
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"I knew you'd get that wrong. The correct answer was paratarsotomus macropalpis.");
+			score = -prizeMoney1;
+			updateScore();
+		}
 	}
 
 	public void playJeopardyTheme() {
