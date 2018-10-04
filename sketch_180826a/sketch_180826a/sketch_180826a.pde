@@ -1,5 +1,5 @@
 float uph = random(100, 400);
-float lph = 999;
+float lph = 3000;
 float pipeX = 250;
 float X = 15;
 float Y = 300;
@@ -7,6 +7,7 @@ float YVelocity = 0;
 float gravity = .2;
 float gap = 150;
 float score = 0;
+float egg = 2;
 void setup(){
 size(350, 600);
 }
@@ -17,7 +18,7 @@ if (YVelocity == 0 && gravity == 0){
 pipeX = 0;
 
 } else {
-pipeX = pipeX -2;
+pipeX = pipeX -egg;
 if(pipeX==0){
 score = score+1;
 }
@@ -46,19 +47,27 @@ text(score, 290, 30);
 
 if (intersectsPipes() == true){
 Y = 570;
+egg = 0;
 gravity = 0;
 YVelocity = 0;
-pipeX = 0;
+pipeX = pipeX+egg;
+}
+if (intersectsPipes2() == true){
+egg = 0;
+pipeX = pipeX+egg;
+Y = 570;
+gravity = 0;
+YVelocity = 0;
 }
 }
-
 void intersect(){
 gravity=1000;
 }
 
+
 void mousePressed(){
 YVelocity = -6.7;
-}
+} 
 boolean intersectsPipes() {
   print("b: "+Y+" uph: "+uph+" lph: "+lph+"\n");
      if (Y-20 < uph && X > pipeX && X < (pipeX+40)){
@@ -67,3 +76,7 @@ boolean intersectsPipes() {
           return true; }
      else { return false; }
 } 
+boolean intersectsPipes2(){
+  if (Y > 570){return true;} 
+  else { return false;}    
+       }
